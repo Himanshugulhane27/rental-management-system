@@ -1,0 +1,41 @@
+service: rental-management-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    PROPERTIES_TABLE: ${self:service}-properties-${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/*"
+
+functions:
+  properties:
+    handler: src/handlers/properties.handler
+    events:
+      - http:
+          path: properties
+          method: any
+          cors: true
+
+resources:
+  Resources:
+    PropertiesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.PROPERTIES_TABLE}
+        AttributeDefinitions:
+          - AttributeName: propertyId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: propertyId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
