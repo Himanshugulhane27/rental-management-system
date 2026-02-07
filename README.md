@@ -31,6 +31,14 @@ rental-management-system/
 
 ## Development Status
 - [x] Project setup
-- [ ] Backend API development
-- [ ] Frontend development
+- [x] Backend API development
+- [x] Frontend development
+- [x] Tenant management
 - [ ] AWS deployment
+- [ ] Lease management
+- [ ] Payment tracking
+
+## Documentation
+- [Deployment Guide](docs/deployment.md)
+- [API Documentation](docs/api.md)
+- [Project Overview](docs/project-overview.md)
