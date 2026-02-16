@@ -1,6 +1,7 @@
 import React from 'react';
 import PropertyList from './components/PropertyList';
 import TenantList from './components/TenantList';
+import './App.css';
 
 function App() {
   return (
